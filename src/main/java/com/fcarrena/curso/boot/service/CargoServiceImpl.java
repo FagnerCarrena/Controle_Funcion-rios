@@ -3,6 +3,7 @@ package com.fcarrena.curso.boot.service;
 
 import com.fcarrena.curso.boot.dao.CargoDao;
 import com.fcarrena.curso.boot.domain.Cargo;
+import com.fcarrena.curso.boot.util.PaginacaoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,5 +47,8 @@ public List<Cargo> buscarTodos(){
 
     }
 
-
+    @Override
+    public PaginacaoUtil<Cargo> buscarPorPagina(int pagina, String direcao) {
+        return dao.buscaPaginada(pagina, direcao);
+    }
 }

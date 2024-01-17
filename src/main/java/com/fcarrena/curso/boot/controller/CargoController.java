@@ -4,6 +4,7 @@ import com.fcarrena.curso.boot.domain.Cargo;
 import com.fcarrena.curso.boot.domain.Departamento;
 import com.fcarrena.curso.boot.service.CargoService;
 import com.fcarrena.curso.boot.service.DepartamentoService;
+import com.fcarrena.curso.boot.util.PaginacaoUtil;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/cargos")
@@ -30,10 +32,17 @@ private DepartamentoService departamentoService;
     }
 
     @GetMapping("/listar")
-    public String listar(ModelMap model) {
-        model.addAttribute("cargos", cargoService.buscarTodos());
-        return "/cargo/lista";
+    public String listar(ModelMap model,
+                         @RequestParam("page") Optional<Integer> page,
+                         @RequestParam("dir") Optional<String> dir) {
 
+        int paginaAtual = page.orElse(1);
+        String ordem = dir.orElse("asc");
+
+        PaginacaoUtil<Cargo> pageCargo = cargoService.buscarPorPagina(paginaAtual, ordem);
+
+        model.addAttribute("pageCargo", pageCargo);
+        return "cargo/lista";
     }
 
     @PostMapping("/salvar")
