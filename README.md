@@ -16,6 +16,7 @@ O projeto foi desenvolvido utilizando as seguintes tecnologias:
 - [JAVASCRIPT](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
 - [THYMELEAF](https://www.thymeleaf.org/)
 - [BOOTSTRAP](https://getbootstrap.com/docs/4.6/getting-started/introduction/)
+- [MySQL Workbench](https://www.mysql.com/products/workbench/)
 
 
 
